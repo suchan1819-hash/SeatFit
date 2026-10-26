@@ -170,6 +170,9 @@ private fun DemoBar(vm: SeatFitViewModel) {
         Pill("P 주차", dot = SF.Mint, onClick = { vm.simulate(VehicleBridge.Gear.PARK) })
         Pill("D 주행", dot = SF.Amber, onClick = { vm.simulate(VehicleBridge.Gear.DRIVE) })
         Pill("실제 차량 신호", dot = SF.Blue, onClick = { vm.simulate(null) })
+        Text("시연 기록", color = SF.Sub, fontSize = 16.sp, modifier = Modifier.padding(start = 12.dp))
+        Pill("일주일 채우기", dot = SF.Cyan, onClick = { vm.seedDemoRecords() })
+        Pill("기록 지우기", dot = SF.Coral, onClick = { vm.clearRecords() })
     }
 }
 

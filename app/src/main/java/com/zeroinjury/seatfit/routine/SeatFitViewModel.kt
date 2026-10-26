@@ -292,6 +292,37 @@ class SeatFitViewModel(app: Application) : AndroidViewModel(app) {
             .apply()
     }
 
+    /** 시연 영상용: 자연스러운 최근 6일 기록(하루 1~2회)을 채운다. 기존 기록은 지운다. */
+    fun seedDemoRecords() {
+        clearRecords()
+        val today = LocalDate.now()
+        // (며칠 전, 부위) — 6일 연속, 총 8회
+        val plan = listOf(
+            5 to BodyPart.LOWER_BACK,
+            4 to BodyPart.NECK, 4 to BodyPart.LOWER_BACK,
+            3 to BodyPart.HIP,
+            2 to BodyPart.SHIN_ANKLE, 2 to BodyPart.UPPER_BACK,
+            1 to BodyPart.NECK,
+            0 to BodyPart.LOWER_BACK,
+        )
+        val e = prefs.edit()
+        val day = mutableMapOf<String, Int>(); val part = mutableMapOf<String, Int>()
+        plan.forEach { (ago, p) ->
+            val d = today.minusDays(ago.toLong())
+            day["d_$d"] = (day["d_$d"] ?: 0) + 1
+            part["p_${d}_${p.name}"] = (part["p_${d}_${p.name}"] ?: 0) + 1
+        }
+        (day + part).forEach { (k, v) -> e.putInt(k, v) }
+        e.apply()
+    }
+
+    /** 운동 기록만 모두 지운다 (설정은 유지) */
+    fun clearRecords() {
+        val e = prefs.edit()
+        prefs.all.keys.filter { it.startsWith("d_") || it.startsWith("p_") || it.startsWith("pain_") }.forEach { e.remove(it) }
+        e.apply()
+    }
+
     fun weekStats(): Stats {
         val today = LocalDate.now()
         val names = listOf("월", "화", "수", "목", "금", "토", "일")
