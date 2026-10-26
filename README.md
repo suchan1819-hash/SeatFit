@@ -34,4 +34,4 @@
 - Android API 28 이상, Gradle 8.0 이상
 
 ## APK
-`apk/` 폴더 또는 GitHub Releases에 있습니다.
+`apk/SeatFit.apk`를 내려받아 Pleos Connect 에뮬레이터에 설치하면 됩니다 (`adb install apk/SeatFit.apk`).
