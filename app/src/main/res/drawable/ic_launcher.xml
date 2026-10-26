@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 시트핏 앱 아이콘: 앱 안의 로고(민트→시안 그라데이션 + 시트 실루엣)와 같은 모양 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+
+    <!-- 배경: 민트 → 시안 -->
+    <path android:pathData="M24,0h60a24,24 0,0 1,24 24v60a24,24 0,0 1,-24 24h-60a24,24 0,0 1,-24 -24v-60a24,24 0,0 1,24 -24z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear"
+                android:startX="0" android:startY="0"
+                android:endX="108" android:endY="108"
+                android:startColor="#FF4FF0D2"
+                android:endColor="#FF38C6F4" />
+        </aapt:attr>
+    </path>
+
+    <!-- 위쪽 은은한 하이라이트 -->
+    <path android:pathData="M24,0h60a24,24 0,0 1,24 24v20h-108v-20a24,24 0,0 1,24 -24z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear"
+                android:startX="54" android:startY="0"
+                android:endX="54" android:endY="44"
+                android:startColor="#33FFFFFF"
+                android:endColor="#00FFFFFF" />
+        </aapt:attr>
+    </path>
+
+    <!-- 시트 실루엣 (24 그리드 → 108 캔버스) -->
+    <group android:scaleX="2.7" android:scaleY="2.7"
+        android:translateX="21.6" android:translateY="21.6">
+        <!-- 헤드레스트 -->
+        <path android:fillColor="#FF03201B"
+            android:pathData="M7.8,1.6h1.4a1.6,1.6 0,0 1,1.6 1.6v0.4a1.6,1.6 0,0 1,-1.6 1.6h-1.4a1.6,1.6 0,0 1,-1.6 -1.6v-0.4a1.6,1.6 0,0 1,1.6 -1.6z" />
+        <!-- 등받이 -->
+        <path android:fillColor="#FF03201B"
+            android:strokeColor="#FF03201B" android:strokeWidth="1.6"
+            android:strokeLineJoin="round"
+            android:pathData="M5.6,7.0 L10.6,6.4 L12.4,15.2 L7.6,15.8 Z" />
+        <!-- 방석 -->
+        <path android:fillColor="#FF03201B"
+            android:pathData="M9.4,14.4h8.2a2,2 0,0 1,2 2v0a2,2 0,0 1,-2 2h-8.2a2,2 0,0 1,-2 -2v0a2,2 0,0 1,2 -2z" />
+        <!-- 레일 -->
+        <path android:fillColor="#00000000"
+            android:strokeColor="#FF03201B" android:strokeWidth="1.8"
+            android:strokeLineCap="round"
+            android:pathData="M9.5,21 L18.5,21" />
+    </group>
+</vector>
