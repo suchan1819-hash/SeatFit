@@ -26,7 +26,7 @@
 ## 사용 기술
 - Kotlin, Jetpack Compose (1600×1100 차량 디스플레이 기준 레이아웃)
 - 정차 감지: AAOS VehicleProperty (GEAR_SELECTION, CURRENT_GEAR, PARKING_BRAKE_ON)
-- 시트 등받이 · 앰비언트 조명: Pleos Vehicle SDK 2.3.2 (Seat, Light) — Vehicle Control 승인 전에는 화면 애니메이션으로 같은 흐름을 보여 줍니다.
+- 시트 등받이 · 앰비언트 조명: Pleos Vehicle SDK 2.3.2 (Seat, Light) — 제어 호출은 P단에서만 합니다. 에뮬레이터에서 제어가 응답하지 않을 때는 화면 애니메이션으로 같은 흐름을 보여 줍니다.
 - 음성: 트레이너 본인 목소리를 바탕으로 제작한 안내 음성(앱 내 오디오 리소스)
 
 ## 테스트 환경
@@ -34,4 +34,13 @@
 - Android API 28 이상, Gradle 8.0 이상
 
 ## APK
-`apk/SeatFit.apk`를 내려받아 Pleos Connect 에뮬레이터에 설치하면 됩니다 (`adb install apk/SeatFit.apk`).
+- 위치: [`apk/이수찬_시트핏_release.apk`](apk/) (release 빌드)
+- 설치: Pleos Connect 에뮬레이터를 켠 상태에서 `adb install -r apk/이수찬_시트핏_release.apk`
+
+## 사용한 오픈소스와 리소스 출처
+- Android Jetpack (Compose, Activity, Lifecycle, Core KTX) — Apache License 2.0
+- Kotlin, kotlinx.coroutines — Apache License 2.0
+- Pleos Connect Vehicle SDK 2.3.2 — 42dot Pleos Connect SDK License Agreement
+- 글꼴: Asta Sans — SIL Open Font License 1.1 (Pleos Connect 시스템 서체)
+- 안내 음성: 개발자(트레이너 이수찬) 본인 목소리를 바탕으로 제작
+- 동작 일러스트: 개발자(이수찬)가 직접 촬영·제작한 앱 전용 이미지
