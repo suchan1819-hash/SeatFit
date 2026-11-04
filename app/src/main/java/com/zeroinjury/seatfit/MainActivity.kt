@@ -4,9 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.os.Build
 import android.os.Bundle
-import android.os.SystemClock
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -44,7 +42,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val f = IntentFilter("com.zeroinjury.seatfit.DEMO")
-        if (Build.VERSION.SDK_INT >= 33) registerReceiver(demo, f, Context.RECEIVER_EXPORTED) else registerReceiver(demo, f)
+        androidx.core.content.ContextCompat.registerReceiver(this, demo, f, androidx.core.content.ContextCompat.RECEIVER_EXPORTED)
         setContent {
             SeatFitTheme { SeatFitApp(vm) }
         }
