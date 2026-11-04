@@ -8,7 +8,7 @@
 - **통증 맞춤 조합 (빠르게 3동작)**: 시작 전에 오늘 통증 정도(살짝 뻐근해요 / 꽤 불편해요 / 많이 아파요)를 고르면, 재활 원칙에 따라 그날에 맞는 3동작을 골라 줍니다. 아플수록 작고 부드러운 동작, 가벼울수록 가동 범위를 크게 쓰는 동작입니다.
 - **전체 코스 (5동작)**: 부위의 모든 동작을 순서대로 진행합니다.
 - **시트 · 조명 연동**: 운동 전 등받이를 젖혀 공간을 만들고(112°→127°), 앰비언트 조명을 호흡 주기에 맞춰 밝혔다 어둡게 합니다. 끝나면 운전 자세로 되돌립니다.
-- **트레이너 음성 코칭**: 동작마다 트레이너 본인 목소리로 만든 음성으로 자세와 포인트를 안내합니다. 화면을 보지 않아도 따라 할 수 있습니다.
+- **트레이너 음성 코칭**: 10년차 트레이너가 직접 쓴 코칭 대본을 음성으로 만들어, 동작마다 자세와 포인트를 안내합니다. 화면을 보지 않아도 따라 할 수 있습니다.
 - **안전**: 출발(D)이 감지되면 즉시 운동을 멈추고 시트를 원위치합니다. 주행 중에는 화면 조작 없이 연속 운전 시간만 보여 줍니다.
 - **휴식 알림**: 연속 운전 2시간이 되면 음성으로 다음 정차 때 쉬어 가도록 알려 줍니다.
 - **운동 기록**: 오늘·이번 주 횟수, 연속 일수, 요일별·부위별 기록을 보여 줍니다.
@@ -21,13 +21,14 @@
 ## 테스트 방법
 - 기어 변경: Pleos Connect Virtual Console (`adb forward tcp:8088 tcp:8088` → http://127.0.0.1:8088 → Motion → Gear)
 - 차량 신호 없이 테스트: 앱 왼쪽 위 로고를 길게 누르면 테스트용 기어(P 주차 / D 주행) 버튼이 나옵니다.
+- adb 명령으로 시연: `adb shell am broadcast -a com.zeroinjury.seatfit.DEMO -p com.zeroinjury.seatfit --es cmd park` (cmd: `park`, `drive`, `ask`, `pain_MILD`·`pain_MODERATE`·`pain_SEVERE`, `part_NECK` 등, `skip`, `home`, `seed`)
 - 시연 모드: 상단의 "시연 모드 · 동작 30초"를 누르면 동작 시간을 30초로 줄였다 늘렸다 할 수 있습니다.
 
 ## 사용 기술
 - Kotlin, Jetpack Compose (1600×1100 차량 디스플레이 기준 레이아웃)
 - 정차 감지: AAOS VehicleProperty (GEAR_SELECTION, CURRENT_GEAR, PARKING_BRAKE_ON)
 - 시트 등받이 · 앰비언트 조명: Pleos Vehicle SDK 2.3.2 (Seat, Light) — 제어 호출은 P단에서만 합니다. 에뮬레이터에서 제어가 응답하지 않을 때는 화면 애니메이션으로 같은 흐름을 보여 줍니다.
-- 음성: 트레이너 본인 목소리를 바탕으로 제작한 안내 음성(앱 내 오디오 리소스)
+- 음성: 트레이너가 쓴 코칭 대본으로 제작한 안내 음성(앱 내 오디오 리소스, MediaPlayer 재생)
 
 ## 테스트 환경
 - Pleos Connect Emulator v2.1.0 (API 34), Vehicle SDK 2.3.2
@@ -42,5 +43,5 @@
 - Kotlin, kotlinx.coroutines — Apache License 2.0
 - Pleos Connect Vehicle SDK 2.3.2 — 42dot Pleos Connect SDK License Agreement
 - 글꼴: Asta Sans — SIL Open Font License 1.1 (Pleos Connect 시스템 서체)
-- 안내 음성: 개발자(트레이너 이수찬) 본인 목소리를 바탕으로 제작
+- 안내 음성(res/raw): 개발자(트레이너 이수찬)가 쓴 대본을 Higgsfield Text to Speech(ElevenLabs 엔진, 프리셋 음성)로 생성
 - 동작 일러스트: 개발자(이수찬)가 직접 촬영·제작한 앱 전용 이미지

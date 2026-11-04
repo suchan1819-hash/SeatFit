@@ -50,6 +50,7 @@ class Voice(context: Context) {
             mp.prepare()
             requestFocus()
             mp.start()
+            VoiceLog.write(ctx, ctx.resources.getResourceEntryName(res))
             player = mp
         }.onFailure { Log.w("SeatFit/Voice", "play failed: ${it.message}") }
     }
@@ -81,6 +82,7 @@ class Voice(context: Context) {
                     mp.prepare()
                     requestFocus()
                     mp.start()
+            VoiceLog.write(ctx, ctx.resources.getResourceEntryName(res))
                     player = mp
                 }.isSuccess
                 if (!ok && cont.isActive) cont.resume(Unit)
@@ -96,5 +98,16 @@ class Voice(context: Context) {
         val w = waiting
         waiting = null
         w?.invoke()
+    }
+}
+
+/** 시연 영상 편집용: 음성이 나간 시각을 기록한다 (Android/data/…/files/vlog.mp4, 텍스트). */
+object VoiceLog {
+    fun write(ctx: Context, what: String) {
+        runCatching {
+            val f = java.io.File(ctx.getExternalFilesDir(null), "vlog.mp4")
+            f.appendText("$what ${android.os.SystemClock.elapsedRealtime()}\n")
+        }
+        Log.i("SeatFit/VoiceT", what)
     }
 }
